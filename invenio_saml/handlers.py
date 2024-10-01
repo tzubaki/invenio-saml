@@ -44,16 +44,25 @@ def default_account_info(attributes, remote_app):
     surname = attributes[mappings["surname"]][0]
     email = attributes[mappings["email"]][0]
     external_id = attributes[mappings["external_id"]][0]
+    if attributes[mappings["domain"]][0]:
+        domain = attributes[mappings["domain"]][0]
+    else:
+        domain = ""    
     username = (
-        remote_app + "-" + external_id.split("@")[0]
+        external_id.split("@")[0]
         if "@" in external_id
-        else remote_app + "-" + external_id
-    )
+        else external_id
+        )
+    #username = (
+    #    remote_app + "-" + external_id.split("@")[0]
+    #    if "@" in external_id
+    #    else remote_app + "-" + external_id
+    #    )
 
     return dict(
         user=dict(
             email=email,
-            profile=dict(username=username, full_name=name + " " + surname),
+            profile=dict(username=username, full_name=name + " " + surname, affiliation=domain),
         ),
         external_id=external_id,
         external_method=remote_app,
