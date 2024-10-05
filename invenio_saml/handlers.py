@@ -59,7 +59,7 @@ def default_account_info(attributes, remote_app):
     return dict(
         user=dict(
             email=email,
-            profile=dict(username=username, full_name=name + " " + surname),
+            profile=dict(username=username, full_name=name + " " + surname, affiliations=""),
         ),
         external_id=external_id,
         external_method=remote_app,
