@@ -88,6 +88,33 @@ def default_account_setup(user, account_info):
     except AlreadyLinkedError:
         pass
 
+    
+def update_user_data(user, account_info):
+    """Update user data if there are differences with the stored data."""
+    user_data_changed = False
+
+    # Update email if it's different
+    if user.email != account_info["user"]["email"]:
+        user.email = account_info["user"]["email"]
+        user_data_changed = True
+    
+    # Update full name if it's different
+    if user.profile.full_name != account_info["user"]["profile"]["full_name"]:
+        user.profile.full_name = account_info["user"]["profile"]["full_name"]
+        user_data_changed = True
+        
+    # Update affiliations if it's different
+    if user.profile.affiliations != account_info["user"]["profile"]["affiliations"]:
+        user.profile.affiliations = account_info["user"]["profile"]["affiliations"]
+        user_data_changed = True
+
+    # If any changes were made, commit the changes to the database
+    #if user_data_changed:
+    #    db.session.commit()
+    # current_app.logger.info("User data updated for user %s", user.email)
+
+    return user_data_changed
+    
 
 def default_sls_handler(auth, next_url):
     """Default SLS handler which simply logs out the user."""
@@ -170,7 +197,8 @@ def acs_handler_factory(
                 abort(401)
 
             account_setup(user, _account_info)
-
+            update_user_data(user, _account_info)
+            
         db.session.commit()
 
         next_url = (
