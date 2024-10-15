@@ -108,9 +108,8 @@ def update_user_data(user, account_info):
     #    user.user_profile.affiliations = account_info["user"]["profile"]["affiliations"]
     #    user_data_changed = True
 
-    profile=dict(username=account_info["user"]["profile"]["username"],
-                                 full_name=account_info["user"]["profile"]["full_name"],
-                                  affiliations=account_info["user"]["profile"]["affiliations"])
+    profile=dict(full_name=account_info["user"]["profile"]["full_name"],
+                 affiliations=account_info["user"]["profile"]["affiliations"])
     user.user_profile = profile
     
     # If any changes were made, commit the changes to the database
