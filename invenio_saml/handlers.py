@@ -44,7 +44,7 @@ def default_account_info(attributes, remote_app):
     surname = attributes[mappings["surname"]][0]
     email = attributes[mappings["email"]][0]
     external_id = attributes[mappings["external_id"]][0]
-    affdomain = ""
+    affdomain = "JRC"
     if "domain" in mappings:
         if (mappings["domain"] in attributes) and (attributes[mappings["domain"]]):
             affdomain = attributes[mappings["domain"]][0]
@@ -114,7 +114,7 @@ def update_user_data(user, account_info):
     
     # If any changes were made, commit the changes to the database
     #if user_data_changed:
-    #    db.session.commit()
+    db.session.commit()
     #    current_app.logger.info("User data updated for user %s", user.email)
 
     return user_data_changed
