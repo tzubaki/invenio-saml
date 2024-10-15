@@ -97,6 +97,8 @@ def update_user_data(user, account_info):
     if user.email != account_info["user"]["email"]:
         user.email = account_info["user"]["email"]
         user_data_changed = True
+    if user_data_changed:
+        db.session.commit()
     
     # Update full name if it's different
     #if user.user_profile.full_name != account_info["user"]["profile"]["full_name"]:
