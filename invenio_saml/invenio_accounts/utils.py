@@ -19,7 +19,7 @@ from flask_security.registerable import register_user
 # FIXME: modify import when integrated inside invenio_accounts
 # from .models import User
 from invenio_accounts.models import User
-from invenio_oauthclient.models import UserIdentity
+from invenio_accounts.models import UserIdentity
 from werkzeug.local import LocalProxy
 
 _security = LocalProxy(lambda: current_app.extensions["security"])
