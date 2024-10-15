@@ -44,7 +44,7 @@ def default_account_info(attributes, remote_app):
     surname = attributes[mappings["surname"]][0]
     email = attributes[mappings["email"]][0]
     external_id = attributes[mappings["external_id"]][0]
-    affdomain = "JRC"
+    affdomain = ""
     if "domain" in mappings:
         if (mappings["domain"] in attributes) and (attributes[mappings["domain"]]):
             affdomain = attributes[mappings["domain"]][0]
